@@ -1,33 +1,39 @@
 ﻿
-string[] myArray;
-Console.WriteLine("Введите массив строк через пробел:");
-string stroka = Console.ReadLine();
-myArray = stroka.Split(' ');
+Console.WriteLine("Введите размер массива:");
+int n = Convert.ToInt32(Console.ReadLine());
+string[] firstArray = new string[n];
+string[] finalArray = new string[n];
+FillArray(firstArray);
+Selection(firstArray, finalArray);
+PrintArray("Начальный массив: ", firstArray);
+PrintArray("Итоговый массив: ", finalArray);
 
 
-void PrintArray(string[] array)
+void FillArray(string[] array)
 {
-    for (int i = 0; i < array.Length; i++)
+    for (int i = 0; i < n; i++)
     {
-        Console.Write($"{array[i]} ");
+        Console.Write($"Введите символы эелемента №{i + 1}:  ");
+        array[i] = Console.ReadLine();
     }
+
     Console.WriteLine();
 }
 
-
-void Selection(string[] array)
+void Selection(string[] array1, string[] array2)
 {
-    for (int i = 0; i < array.Length; i++)
+    int count = 0;
+    for (int i = 0; i < array1.Length; i++)
     {
-        string element = array[i];
-        if (element.Length <= 3)
+        if(array1[i].Length <= 3)
         {
-            array[i] = element;
-    }
-        else array[i] = string.Empty;
+            array2[count] = array1[i];
+            count++;
+        }
     }
 }
-
-Selection(myArray);
-Console.Write("Итоговый массив: ");
-PrintArray(myArray);
+void PrintArray (string text, string[] array)
+{
+    Console.WriteLine();
+    Console.WriteLine($"{text}[{string.Join(", ", array)}]\n");
+}
